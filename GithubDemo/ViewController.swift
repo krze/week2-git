@@ -11,10 +11,10 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var searchBar: UISearchBar!
     var searchSettings = GithubRepoSearchSettings()
-    
     var gitHubRepos: [GithubRepo]?
-
+    
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +47,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCellWithIdentifier("GitCell", forIndexPath: indexPath) as! GitCell
         
         
-        cell.name = gitHubRepos[indexPath.row]
+        if let gitHubRepos = gitHubRepos {
+            cell.githubRepo = gitHubRepos[indexPath.row]
+        }
         
         return cell
         

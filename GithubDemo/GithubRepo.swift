@@ -16,7 +16,7 @@ class GithubRepo {
     var name: String?
     var description: String?
     var ownerHandle: String?
-    var ownerAvatarURL: String?
+    var ownerAvatarURL: NSURL?
     var stars: Int?
     var forks: Int?
     
@@ -39,7 +39,7 @@ class GithubRepo {
                 self.ownerHandle = ownerHandle
             }
             if let ownerAvatarURL = owner["avatar_url"] as? String {
-                self.ownerAvatarURL = ownerAvatarURL
+                self.ownerAvatarURL = ownerAvatarURL as? NSURL
             }
         }
         
