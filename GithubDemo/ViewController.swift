@@ -8,10 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var searchBar: UISearchBar!
     var searchSettings = GithubRepoSearchSettings()
+    
+    var gitHubRepos: [GithubRepo]?
 
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,11 +22,35 @@ class ViewController: UIViewController {
         searchBar = UISearchBar()
         searchBar.delegate = self
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         // add search bar to navigation bar
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120
+        
         doSearch()
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if gitHubRepos != nil {
+            return gitHubRepos!.count
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("GitCell", forIndexPath: indexPath) as! GitCell
+        
+        
+        cell.name = gitHubRepos[indexPath.row]
+        
+        return cell
+        
     }
     
     private func doSearch() {
