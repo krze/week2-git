@@ -13,6 +13,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var searchSettings = GithubRepoSearchSettings()
     var gitHubRepos: [GithubRepo]?
     
+
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -37,8 +39,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if gitHubRepos != nil {
+            
+            println("Got repos")
             return gitHubRepos!.count
+            
+            
         } else {
+            println("got nothing")
             return 0
         }
     }
@@ -64,8 +71,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 println("\n\t[Stars: \(repo.stars!)]")
                 println("\n\t[Forks: \(repo.forks!)]")
                 println("\n\t[Owner: \(repo.ownerHandle!)]")
-                println("\n\t[Avatar: \(repo.ownerAvatarURL!)]")
+//                println("\n\t[Avatar: \(repo.ownerAvatarURL!)]")
             }
+            self.gitHubRepos = repos
+            self.tableView.reloadData()
             MBProgressHUD.hideHUDForView(self.view, animated: true)
         }, error: { (error) -> Void in
             println(error)

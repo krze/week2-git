@@ -36,7 +36,16 @@ class GitCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // Rounding the corners of the restaurant photo thumbnail imageView
+        avatarImage.layer.cornerRadius = 3
+        avatarImage.clipsToBounds = true
+        
+        // Setting the preferred max width of the restaurant name's label
+        
+        nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width
     }
+
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
