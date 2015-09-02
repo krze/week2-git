@@ -14,6 +14,7 @@ private let clientSecret: String? = nil
 
 class GithubRepo {
     var name: String?
+    var description: String?
     var ownerHandle: String?
     var ownerAvatarURL: String?
     var stars: Int?
@@ -41,6 +42,10 @@ class GithubRepo {
                 self.ownerAvatarURL = ownerAvatarURL
             }
         }
+        
+        if let description = jsonResult["description"] as? String {
+            self.description = description
+        }
     }
     
     class func fetchRepos(settings: GithubRepoSearchSettings, successCallback: ([GithubRepo]) -> Void, error: ((NSError?) -> Void)?) {
@@ -63,6 +68,7 @@ class GithubRepo {
     }
     
     private class func queryParamsWithSettings(settings: GithubRepoSearchSettings) -> [String: String] {
+        
         var params: [String:String] = [:];
         if let clientId = clientId {
             params["client_id"] = clientId;

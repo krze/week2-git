@@ -30,11 +30,12 @@ class ViewController: UIViewController {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         GithubRepo.fetchRepos(searchSettings, successCallback: { (repos) -> Void in
             for repo in repos {
-                println("[Name: \(repo.name!)]" +
-                    "\n\t[Stars: \(repo.stars!)]" +
-                    "\n\t[Forks: \(repo.forks!)]" +
-                    "\n\t[Owner: \(repo.ownerHandle!)]" +
-                    "\n\t[Avatar: \(repo.ownerAvatarURL!)]")
+                println("[Name: \(repo.name!)]")
+                println("\n\t[Description: \(repo.description!)]")
+                println("\n\t[Stars: \(repo.stars!)]")
+                println("\n\t[Forks: \(repo.forks!)]")
+                println("\n\t[Owner: \(repo.ownerHandle!)]")
+                println("\n\t[Avatar: \(repo.ownerAvatarURL!)]")
             }
             MBProgressHUD.hideHUDForView(self.view, animated: true)
         }, error: { (error) -> Void in
